@@ -1,3 +1,5 @@
+
+# Facet grid of data death and hospitalization risk for women, all conditions
 library(ggplot2)
 
 data <- read.csv(file="data.csv")
@@ -13,6 +15,7 @@ ggplot(subset(data,  sex == 'female'), aes(x=age, y=risk, group=model, color=mod
 
 
 
+# Facet grid of data death and hospitalization risk for women, all conditions paired with CKD
 ckd <- read.csv(file="ckd.csv")
 
 View(ckd)
@@ -25,7 +28,8 @@ ggplot(subset(ckd,  sex == 'female'), aes(x=age, y=risk, group=model, color=mode
         )
 
 
-gridDf <- read.csv(file="grid")
+# Facet grid of data death and hospitalization risk for women, all 2 condition permutations. Since this is symetrical across the diagonal, I popped it into illustrator and deleted the redundant 1/2 of it
+gridDf <- read.csv(file="grid.csv")
 
 View(gridDf)
 
