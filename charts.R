@@ -1,18 +1,37 @@
 library(ggplot2)
 
-# Load the csv from previous tutorial
-
 data <- read.csv(file="data.csv")
-
-# View the dataset in RStudio (note the capital V)
 
 View(data)
 
-ggplot(subset(data, model == 'hospitalisationrisk'), aes(x=age, y=risk, group=condition, color=condition)) +
+ggplot(subset(data,  sex == 'female'), aes(x=age, y=risk, group=model, color=model)) +
   geom_line()+
-  facet_wrap(~ city)+
+  facet_wrap(~ condition)+
   scale_x_continuous()+
   theme(axis.ticks = element_blank(), 
-        axis.text.x = element_blank(),
-        legend.position = "none"
+        )
+
+
+
+ckd <- read.csv(file="ckd.csv")
+
+View(ckd)
+
+ggplot(subset(ckd,  sex == 'female'), aes(x=age, y=risk, group=model, color=model)) +
+  geom_line()+
+  facet_wrap(~ condition2)+
+  scale_x_continuous()+
+  theme(axis.ticks = element_blank(), 
+        )
+
+
+gridDf <- read.csv(file="grid")
+
+View(gridDf)
+
+ggplot(subset(gridDf,  sex == 'female'), aes(x=age, y=risk, group=model, color=model)) +
+  geom_line()+
+  facet_wrap(~ conditionLabel)+
+  scale_x_continuous()+
+  theme(axis.ticks = element_blank(), 
         )
