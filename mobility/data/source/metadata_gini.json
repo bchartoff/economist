@@ -1,0 +1,20 @@
+{
+    "release": {
+        "id": "acs2019_5yr",
+        "name": "ACS 2019 5-year",
+        "years": "2015-2019"
+    },
+    "tables": {
+        "B19083": {
+            "columns": {
+                "B19083001": {
+                    "indent": 0,
+                    "name": "Gini Index"
+                }
+            },
+            "denominator_column_id": null,
+            "title": "Gini Index of Income Inequality",
+            "universe": "Households"
+        }
+    }
+}
