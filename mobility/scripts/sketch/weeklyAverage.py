@@ -44,8 +44,10 @@ for ind, val in enumerate(mobilityHead):
 
 tempData = {}
 
-def parseMobilityCSV(csvReader):
 
+c = {}
+def parseMobilityCSV(csvReader):
+    t = []
     for row in csvReader:
         county = row[h["sub_region_2"]]
         state = row[h["sub_region_1"]]
@@ -67,18 +69,29 @@ def parseMobilityCSV(csvReader):
         dateDate = date.fromisoformat(dateStr)
         year = dateDate.isocalendar().year
         week = dateDate.isocalendar().week
-        if dateDate in usHolidays or dateDate.weekday() != 2:
+        
+        # if dateDate in usHolidays:
+        #     t.append(dateDate.weekday())
+
+        if dateDate in usHolidays or dateDate.weekday() != 1:
             continue
         weekNum = week - 8 if year == 2020 else week - 8 + 53
-        if(weekNum not in tempData[tempKey]["workplace"]):
-            tempData[tempKey]["workplace"][weekNum] = []
+        # if(weekNum == 38):
+        #     print(dateDate)
+        # if(weekNum not in tempData[tempKey]["workplace"]):
+            # tempData[tempKey]["workplace"][weekNum] = []
 
         workplaceValStr = row[h["workplaces_percent_change_from_baseline"]]
+        # if(weekNum == 38):
+        #     print(float(workplaceValStr))
         # workplaceVal = float(row[h["workplaces_percent_change_from_baseline"]])
         if(workplaceValStr != ''):
-            tempData[tempKey]["workplace"][weekNum].append(float(workplaceValStr))
+            tempData[tempKey]["workplace"][weekNum] = float(workplaceValStr)
+
         # print(dateStr, dateDate.isocalendar(), year, week, weekNum)
 
+    # print(list(set(t)))
+    # print(c)
 parseMobilityCSV(mobilityReader2020)
 parseMobilityCSV(mobilityReader2021)
 
@@ -97,9 +110,11 @@ for place in tempData:
     for i in range(0, maxWeek):
         # if len(el["workplace"][]) > 0:
         if i in el["workplace"]:
-            if len(el["workplace"][i]) > 0:
-                outRow.append(np.mean(el["workplace"][i]))
+            # if len(el["workplace"][i]) > 0:
+            outRow.append(el["workplace"][i])
         else:
+            if(i == 38):
+                print(i)
             outRow.append(-999)
     out.writerow(outRow)
 

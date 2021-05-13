@@ -1,117 +1,196 @@
-<!-- -92 to 66
-$142,299
- -->
 <!DOCTYPE html>
-<meta charset="utf-8">
-
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
-
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
-<div id = "weekNum"></div>
-<script>
-
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 960 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-//Read the data
-d3.csv("data/weeklyData.csv", function(error, data) {
-
-  // Add X axis
-  // console.log(error, data)
-  // data = data.filter(function(el){ return el.state == "Wyoming"})
-  var x = d3.scaleLinear()
-    .domain([-92, 20])
-    .range([ 0, width ]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
-
-  // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([0, 1])
-    .range([ height, 0]);
-  svg.append("g")
-    .call(d3.axisLeft(y));
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,900;1,300" rel="stylesheet">
 
 
-  // Add dots
-  // svg.append('g')
-  //   .selectAll(".dot")
-  //   .data(data)
-  //   .enter()
-  //   .append("circle")
-  //     .attr("cx", function (d) { return x(d.wk7); } )
-  //     .attr("cy", function (d) { return y(d.trumpVoteshare); } )
-  //     .attr("r", 1.5)
-  //     .style("fill", "#69b3a2")
-  //     .attr("class","dot")
+</head>
+<body>
 
-var colors = d3.scaleLinear()
-    .domain([0,1])
-    .range(["#0FB2F2","#F22E2E"]);
+<div id = "sectionIndex" data-index="0"></div>
+
+<div class="container">
+  <div id='graphic'>
+    <div id = "topText">
+        <div id = "topTitle">Title</div>
+        <div class = "pubDate">November 29, 2017</div>
+        <p>
+        School funding is a blend of federal, state, and local dollars. Local funding largely comes from property taxes. Federal money, which accounts for just 10 percent of all education funding, tends to target low-income students or other distinct groups. State funding is where things get complicated. 
+        </p>
+        <p>
+        In all but five states, statewide formulas control most <a href = "https://apps.urban.org/features/education-funding-trends/" target = "_blank">school funding</a>. State education funding formulas have been the subject of controversy, confusion, and even lawsuits. Designed to ensure adequate funding across schools&mdash;and occasionally to <a href = "https://apps.urban.org/features/school-funding-do-poor-kids-get-fair-share/" target = "_blank">promote equity</a>&mdash;funding formulas distribute revenue to districts based on a variety of factors. 
+        </p>
+        <p>
+        These formulas often attempt to account for state and district revenue and anticipated differences among districts. What they cannot always account for, however, is how districts might respond to different incentives. In these often complex funding models, states aim to strike a balance between giving localities some control while maintaining enough control at the state level to ensure all students can access a quality education. 
+        </p>
+        <p>
+        Here, we explore the most common funding models states use and how districts might respond to those models. No one model is best&mdash;they create different incentives for districts that can bring distinct advantages and disadvantages. 
+        </p>
+      </div>
+    <div id='sections'>
+      <section class="step">
+        <div class="title">Foundation Grants: States Ensure an Equal Foundation for All Districts</div>
+      </section>
+      <section class="step step1">
+        <p>
+        The state fills the gap between what the district is expected to provide and the predetermined minimum, as indicated with a dark blue bar.</p>
+      </section>
+      <section class="step">
+        <p>
+        In our example, districts are required by the state to have a minimum 1 percent property tax, but they can opt to tax up to 1.4 percent. 
+        </p>
+        <p>
+        We&rsquo;ve modeled what would happen if every district taxed at a higher rate. Critically, the state&rsquo;s contribution remains the same regardless of the district&rsquo;s property tax rate, so any increase in funding comes from the district&rsquo;s local tax base.
+        </p>
+        <p>
+        As you&rsquo;d expect, the property-poor districts don&rsquo;t get much additional funding by raising the property tax, but property-wealthy districts can raise a lot more. Still, every district is exceeding the minimum at this higher tax rate.
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        Using the sliders and buttons to the right, you can model what happens as districts change their property tax rates. Changes make a bigger difference for the property-wealthy districts, though the property-poor districts will never be far above the $10,000 threshold. 
+        </p>
+        <p>
+        This approach to funding can mean that the property-wealthy districts spend more per student than the property-poor districts. However, it also ensures that every district has at least $10,000 per student. That is, as long as the state can afford its contribution.
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        But what if a state isn&rsquo;t able to fulfill its commitment to districts? Here, we&rsquo;ve modeled what would happen if a state, facing a budget constraint, was forced to lower the minimum funding level to $6,000 per student. The curve is more pronounced now, with the property-wealthy districts far outspending the property-poor districts.
+        </p>
+        <p>
+        Foundation funding can minimize differences in spending across districts when states can afford to provide large grants. Since that is not always the case, however, some states use additional mechanisms to try to account for differences in districts&rsquo; property wealth.
+        </p>
+      </section>
+      <section class="step">
+        <div class="title">Guaranteed Tax Base: States Balance Local Contribution</div>
+        <p>
+        Some states&rsquo; formulas equalize not just access to a minimum level of funding, but also the revenue generated at a given tax rate. This approach, sometimes called power equalization, allows each district to tax and spend as if it had the same local property tax base, thereby eliminating the inequities that foundation funding can produce.
+        </p>
+        <p>
+        The guaranteed tax base approach promises districts a consistent amount of money for their tax effort. Rather than ensuring a minimum overall funding level, the state instead commits to providing a minimum amount for each percentage of property tax regardless of how much district tax revenue is actually raised by that tax.
+        </p>
+        <p>
+        In our example, the state guarantees each district $6,000 per student per 1 percent tax. This means that in a district where that tax rate yields $1,000 per student, the state will contribute $5,000. At a 1 percent tax rate, this looks similar to the foundation funding model, with all but the most property-wealthy districts spending $6,000 per student.
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        At a higher tax rate, however, the pattern changes. Whereas with a pure foundation grant, the more property-rich districts exceed the minimum by more than their property-poor counterparts, with a guaranteed tax base, all except the most property-rich districts exceed the minimum by the same amount. That is, a 0.2 percent increase in property taxes generates the same financial boost in almost every district, regardless of the tax base.
+        </p>
+        <p>
+        Districts that could previously only raise small amounts of revenue from property taxes can now raise substantially more with the guarantee that the state &ldquo;match&rdquo; their effort. 
+        </p>
+        <p>
+        Property-poor districts now have an incentive to raise local taxes, since each additional dollar of local money raised yields more money from the state.
+        </p>
+        <p>
+        This model also ensures that all but the wealthiest districts remain relatively equal. Because the state guarantees $6,000 per student per percent property tax, districts that tax at the same level will always have the same amount of money per student.   
+        </p>
+        <p>
+        Of course, the districts that don&rsquo;t need a state contribution can still raise well above the minimum&mdash;but some states have found a way to control for this, too.
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        In both the foundation and guaranteed tax base models, some districts do not receive any state aid because their property wealth per student is higher than the minimum level established by the state. 
+        </p>
+        <p>
+        Some states let the districts keep these funds, but other states choose to &ldquo;recapture&rdquo; this revenue by setting a cap on spending for these unaided districts (indicated in yellow). For example, in our power equalization model, we can decide that any local funds raised above $6,000 are recaptured by the state.
+        </p>
+        <p>
+        In any state funding model, however, there&rsquo;s a risk to using recapture. 
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        Those living in a property-wealthy district may have preferences for high spending on education. Under recapture, additional dollars in property taxes would not go to local students, and property values in the district may decline as a result. 
+        </p>
+        <p>
+        (In our model, districts can keep state funding above the minimum, but not local revenue.)
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        If the state relies on recapture to fund redistribution to property-poor districts, the state may be forced to lower the recapture threshold year after year to continue to raise the same amount of money.
+        </p>
+        <p>
+        With the lower recapture threshold, property values may decline even further, causing a downward spiral of decreasing thresholds for recapture and subsequent decreasing property values.
+        </p>
+        <p>
+        Because guaranteed tax base formulas can dramatically change incentives for districts, states that use a guaranteed tax base model sometimes use it in combination with a foundation grant, matching dollars spent above a minimum foundation amount.
+        </p>
+      </section>
+      <section class="step">
+        <div class="title">Centralized School Finance: States Control Local Contribution</div>
+        <p>
+        So far, we&rsquo;ve seen that states can either guarantee a minimum level of adequate spending or guarantee a minimum tax base for property-poor districts. In each case, districts have some leeway to choose property tax rates to raise required local funding.
+        </p>
+        <p>
+        Some states have opted for a different path. Rather than trying to outspend rich districts or equalize property values, some states have essentially centralized their school finance system. The state assigns a standard property tax rate for all districts. In return, it guarantees roughly the same per student amount across districts.
+        </p>
+        <p>
+        In our example, the state sets a standard payment of $10,000 per pupil, and each district pays a required 1 percent tax.
+        </p>
+        <p>
+        This model looks like a foundation grant, with the state guaranteeing a certain amount of funding, but with the centralized model, districts can&rsquo;t raise more than the minimum amount.
+        </p>
+        <p>
+        Just like in the other models, states that use the centralized school finance model have to decide how to treat districts, like our richest district, that can raise more than the standard payment using a 1 percent tax. The state could grandfather in such districts, either temporarily or permanently, or the state could recapture surplus funds.
+        </p>
+      </section>
+      <section class="step lastStep">
+        <p>
+
+        </p>
+      </section>
+      <div id = "extra-space"></div>
+    </div>
+
+    <div id='vis'>
+        <div class = "x axisLabel pos">More time at work</div>
+        <div class = "x axisLabel neg">Less time at work</div>
+        <div class = "y axisLabel pos">More Trump votes</div>
+        <div class = "y axisLabel neg">More Clinton votes</div>
+    </div>
+  </div>
+</div>
+<div id = "bottomContent">
+  <div id = "bottomTitle">Accounting for Student Need</div>
+  <p>
+  In this interactive, we&rsquo;ve highlighted three methods states use to distribute state funding to school districts. Although these methods are often tied to property wealth, in many states, the districts with the neediest students are not the ones with the lowest property wealth. In part because of this, most states use additional mechanisms to deliver more funding to districts that have more need, either through the formula or outside of it.
+  </p>
+  <p>
+  For example, many states &ldquo;weight&rdquo; students when running their formula, assigning more weight (and therefore more dollars) to students from low-income backgrounds or to students with special needs when calculating the amount of funding guaranteed by the state. States may also use categorical funding, assigning dollars specifically for certain programs or for spending on specific students.
+  </p>
+  <p>
+  Because states can provide revenue through other mechanisms, the proportion of state funds distributed through a typical formula grant vary substantially. For example, Arizona and North Carolina distribute roughly 98 percent of total state funding through their formulas, yet Connecticut distributes 38 percent of funding this way, and South Carolina distributes just 24 percent of its funding through a formula. 
+  </p>
+  <p>
+  Whether relying heavily on a funding formula is good for schools and students depends on the state and its goals; there is no one-size-fits-all approach to school funding. States have different aims, different obstacles, and different students, and so must choose the combination of approaches that works best given the situation. 
+  </p>
+</div>
 
 
-  svg.append('g')
-    .selectAll(".dot2")
-    .data(data)
-    .enter()
-    .append("circle")
-      .attr("cx", function (d) { return x(d.wk62); } )
-      .attr("cy", function (d) { return y(d.trumpVoteshare); } )
-      .attr("r", function(d){
-        return Math.sqrt(d.pop) * 0.008
-      })
-      .style("fill", function(d){
-        return colors(d.trumpVoteshare)
-        })
-      .attr("class","dot2")
-      .style("opacity",.4)
 
-  // svg.append('g')
-  //   .selectAll(".line")
-  //   .data(data)
-  //   .enter()
-  //   .append("line")
-  //     .attr("x1", function (d) { return x(d.wk7); } )
-  //     .attr("x2", function (d) { return x(d.wk7); } )
-  //     .attr("y1", function (d) { return y(d.income); } )
-  //     .attr("y2", function (d) { return y(d.income); } )
-  //     .style("stroke", "#ff0000")
-  //     .style("stroke-width",".1")
-  //     .style("opacity",1)
-  //     .attr("class","line")
+<script src="lib/d3.js"></script>
+<script src="lib/jquery-2.2.1.min.js"></script>
+<script src="lib/d3-voronoi.min.js"></script>
+<script src="js/globals.js"></script>
+<script src="js/scroller.js"></script>
+<script src="js/sections.js"></script>
+
+
+</body>
+</html>
 
 
 
-var wk = 1;
-d3.select("body")
-    .on("click", function(){
-        wk += 1
-        // console.log("foo", wk)
-        d3.select("#weekNum").text("week " + wk)
-        d3.selectAll(".dot2")
-            .transition()
-            .attr("cx", function (d) { return x(d["wk" + wk]); } )
-        // d3.selectAll(".line")
-        //     .transition()
-        //     .attr("x2", function (d) { return x(d["wk" + wk]); } )
-    })
 
-
-
-})
-
-</script>
+<!--  -->
