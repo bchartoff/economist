@@ -73,8 +73,10 @@ def parseMobilityCSV(csvReader):
         # if dateDate in usHolidays:
         #     t.append(dateDate.weekday())
 
-        if dateDate in usHolidays or dateDate.weekday() != 1:
+        if dateDate.weekday() != 1:
             continue
+        if dateDate in usHolidays:
+            print(dateDate)
         weekNum = week - 8 if year == 2020 else week - 8 + 53
         datestmp.append(dateStr)
         # print(datestmp)

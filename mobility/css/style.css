@@ -231,6 +231,33 @@ p{
     font-weight: 100;
     width: 365px;
 }
+.dateCaption{
+position: absolute;
+    top: 97px;
+    right: -9px;
+    /* font-weight: bold; */
+    font-size: 21px;
+    animation: fat 5s infinite;
+    display: none;
+}
+.element {
+  
+}
+
+@keyframes fat {
+  0% {
+    color: #fdbf11;
+  }
+  25% {
+    color: green;
+  }
+  75%{
+    color: purple;
+  }
+  100%{
+    color: #fdbf11;
+  }
+}
 
 .exampleLabel{
   font-weight: bold;

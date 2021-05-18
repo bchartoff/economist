@@ -152,6 +152,7 @@ svg = d3.select(this)
     .attr("dy", -20)
     .attr("dx", 20)
     .text("Cook County, IL")
+    .style("display", "none")
 
   dots.append("line")
     .attr("id", "shelbyLine")
@@ -174,6 +175,7 @@ svg = d3.select(this)
     .attr("dy", -10)
     .attr("dx", 10)
     .text("Shelby County, IL")
+    .style("display", "none")
 
   dots.append("text")
     .attr("class", "countyExample exampleDateLabel")
@@ -183,6 +185,7 @@ svg = d3.select(this)
     .attr("dy", -10)
     .attr("dx", -30)
     .text("3/24/2020")
+    .style("display", "none")
 
   dots.append("text")
     .attr("class", "countyExample exampleDateLabel")
@@ -192,6 +195,7 @@ svg = d3.select(this)
     .attr("dy", -18)
     .attr("dx", -30)
     .text("3/24/2020")
+    .style("display", "none")
 
   dots.append("circle")
     .attr("class", "countyExample exampleStartDot")
@@ -200,6 +204,7 @@ svg = d3.select(this)
     .attr("cx", function(d){ return x(d.wk5) })
     .attr("r", 10)
     .style("fill" ,"#fdbf11")
+    .style("display", "none")
 
   dots.append("circle")
     .attr("class", "countyExample exampleStartDot")
@@ -208,6 +213,7 @@ svg = d3.select(this)
     .attr("cx", function(d){ return x(d.wk5) })
     .attr("r", 3)
     .style("fill" ,"#fdbf11")
+    .style("display", "none")
 
 
 
@@ -262,6 +268,7 @@ svg = d3.select(this)
 
   function step1(data) {
     console.log("blank 1")
+    d3.selectAll(".countyExample").style("display", "none")
   }
 
   function step2(data){
@@ -387,6 +394,10 @@ svg = d3.select(this)
       var dateStr = MONTHS[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
       d3.select(".dateLabel")
         .text(dateStr)
+
+      // console.log(wkNum)
+      // if(wkNum == 52){
+      d3.select(".dateCaption").style("display", wkNum == 52 ? "block" : "none")
   }
 
   function update1(data,offset){
