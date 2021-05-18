@@ -45,7 +45,7 @@ for ind, val in enumerate(mobilityHead):
 tempData = {}
 
 
-c = {}
+datestmp = []
 def parseMobilityCSV(csvReader):
     t = []
     for row in csvReader:
@@ -76,6 +76,9 @@ def parseMobilityCSV(csvReader):
         if dateDate in usHolidays or dateDate.weekday() != 1:
             continue
         weekNum = week - 8 if year == 2020 else week - 8 + 53
+        datestmp.append(dateStr)
+        # print(datestmp)
+
         # if(weekNum == 38):
         #     print(dateDate)
         # if(weekNum not in tempData[tempKey]["workplace"]):
@@ -92,30 +95,49 @@ def parseMobilityCSV(csvReader):
 
     # print(list(set(t)))
     # print(c)
+
+
 parseMobilityCSV(mobilityReader2020)
 parseMobilityCSV(mobilityReader2021)
 
-maxWeek = 63
+maxWeek = 70
 
 out = csv.writer(open("data/weeklyData.csv","w"))
 outHead = ["fips", "county", "state", "pop", "trumpVoteshare"]
+
+for i in range(0, maxWeek):
+    outHead.append("hide%i"%i)
 for i in range(0, maxWeek):
     outHead.append("wk%i"%i)
+
 out.writerow(outHead)
 for place in tempData:
     # print(place)
     el = tempData[place]
     outDict = {"fips": el["fips"], "county": el["county"], "pop": el["pop"],"trumpVoteshare": el["trumpVoteshare"],  "state": el["state"] }
     outRow = [el["fips"], el["county"], el["state"], el["pop"], el["trumpVoteshare"]]
+    wkData = []
     for i in range(0, maxWeek):
         # if len(el["workplace"][]) > 0:
         if i in el["workplace"]:
             # if len(el["workplace"][i]) > 0:
-            outRow.append(el["workplace"][i])
+            outRow.append(1)
+            wkData.append(el["workplace"][i])
         else:
-            if(i == 38):
-                print(i)
-            outRow.append(-999)
+            outRow.append(0)
+            wkData.append(-999)
+
+    # if(el["fips"] == 47019):
+    prevWeek = 0
+    for d in wkData:
+        if(d == -999):
+            outRow.append(prevWeek)
+        else:
+            prevWeek = d
+            outRow.append(d)
+        # print(outRow)
+
+    # print(outRow)
     out.writerow(outRow)
 
 #     for wk in el["workplace"]:

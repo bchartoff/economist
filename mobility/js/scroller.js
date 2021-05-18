@@ -87,7 +87,7 @@ function scroller() {
     // sectionPositions will be each sections
     // starting position relative to the top
     // of the first section.
-    visPosition()
+    // visPosition()
     sectionPositions = [];
     var startPos;
     sections.each(function (d, i) {
@@ -103,46 +103,41 @@ function scroller() {
 
 
   function fixVis(){
-      if(d3.select(".step").node().getBoundingClientRect().top <= 64){
-        var bump =  150;
-        if(d3.selectAll(".step").nodes()[d3.selectAll(".step").nodes().length-1].getBoundingClientRect().bottom <= VIS_WIDTH+MARGIN.top+MARGIN.bottom+20+bump){
+    // console.log(d3.select(".step").node().getBoundingClientRect().top)
+    // console.log(d3.select("#topText").node().getBoundingClientRect().bottom)
+    
+      if(d3.select("#topText").node().getBoundingClientRect().bottom <= 50){
+          // console.log("fixing")
           d3.select("#vis")
-            .classed("posRelBottomSingleCol", false)
-            .classed("posRelTopSingleCol", false)
-            .classed("posRelBottom", true)
-            .classed("posRelTop", false)
-            .classed("posFixed", false)
-            .style("top", "inherit")
-          d3.select("#sections")
-            .style("z-index",90)
-        }else{
-          d3.select("#vis")
-            .classed("posRelBottomSingleCol", false)
-            .classed("posRelTopSingleCol", false)
-            .classed("posRelBottom", false)
-            .classed("posRelTop", false)
+            // .classed("posRelBottomSingleCol", false)
+            // .classed("posRelTopSingleCol", false)
+            // .classed("posRelBottom", false)
+            // .classed("posRelTop", false)
             .classed("posFixed", true)
             .style("top", "20px")  
             .style("left", .5*(window.innerWidth-960) + "px")
           d3.select("#sections")
             .style("z-index",90)
 
-        }
-      }else{
+
+      }
+      else{
+        // console.log("Asdf")
+        // console.log("top unstick")
           d3.select("#vis")
-            .classed("posRelBottomSingleCol", false)
-            .classed("posRelTopSingleCol", false)
-            .classed("posRelBottom", false)
-            .classed("posRelTop", true)
+            // .classed("posRelBottomSingleCol", false)
+            // .classed("posRelTopSingleCol", false)
+            // .classed("posRelBottom", false)
+            // .classed("posRelTop", true)
             .classed("posFixed", false)  
             .style("top", "inherit")
+            .style("left", "inherit")
           d3.select("#sections")
             .style("z-index",90)
       }    
   }
   window.setInterval(function(){
     fixVis()
-    visPosition()
   }, 20);
   /**
    * position - get current users position.

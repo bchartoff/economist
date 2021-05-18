@@ -103,8 +103,8 @@ svg = d3.select(this)
     .attr("transform", "translate(" + x(0) + ",0)")
     .attr("class", "y axis");
 
-  g.append('g')
-    .selectAll(".dot2")
+  var dots = g.append('g')
+  dots.selectAll(".dot2")
     .data(data)
     .enter()
     .append("circle")
@@ -117,9 +117,97 @@ svg = d3.select(this)
         return colors(d.trumpVoteshare)
         })
       // .style("stroke", "black")
-      .attr("class","dot2")
+      .attr("class", function(d){
+        return "dot2 " + "f" + d.fips 
+      })
       .style("opacity",.4)
 
+  d3.select(".dateLabel")
+    .text(MONTHS[START_DATE.getMonth()] + " " + START_DATE.getDate() + ", " + START_DATE.getFullYear())
+
+
+  var cookD =  data.filter(function(d){ return d.fips == "17031"})[0],
+      shelbyD = data.filter(function(d){ return d.fips == "17173"})[0]
+
+  console.log(cookD)
+
+  dots.append("line")
+    .attr("id", "cookLine")
+    .attr("class", "countyExample exampleLine")
+    .datum(cookD)
+    .attr("x1", function(d){ return x(d.wk5) })
+    .attr("x2", function(d){ return x(d.wk5) })
+    .attr("y1", function(d){ return y(d.trumpVoteshare) })
+    .attr("y2", function(d){ return y(d.trumpVoteshare) })
+    .style("stroke", "#fdbf11")
+    .style("stroke-width", "10px")
+    .style("display","none")
+
+  dots.append("text")
+    .attr("id", "cookLabel")
+    .attr("class", "countyExample exampleLabel")
+    .datum(cookD)
+    .attr("y", function(d){ return y(d.trumpVoteshare) })
+    .attr("x", function(d){ return x(d.wk5) })
+    .attr("dy", -20)
+    .attr("dx", 20)
+    .text("Cook County, IL")
+
+  dots.append("line")
+    .attr("id", "shelbyLine")
+    .attr("class", "countyExample exampleLine")
+    .datum(shelbyD)
+    .attr("x1", function(d){ return x(d.wk5) })
+    .attr("x2", function(d){ return x(d.wk5) })
+    .attr("y1", function(d){ return y(d.trumpVoteshare) })
+    .attr("y2", function(d){ return y(d.trumpVoteshare) })
+    .style("stroke", "#fdbf11")
+    .style("stroke-width", "4px")
+    .style("display","none")
+
+  dots.append("text")
+    .attr("id", "shelbyLabel")
+    .attr("class", "countyExample exampleLabel")
+    .datum(shelbyD)
+    .attr("y", function(d){ return y(d.trumpVoteshare) })
+    .attr("x", function(d){ return x(d.wk5) })
+    .attr("dy", -10)
+    .attr("dx", 10)
+    .text("Shelby County, IL")
+
+  dots.append("text")
+    .attr("class", "countyExample exampleDateLabel")
+    .datum(shelbyD)
+    .attr("y", function(d){ return y(d.trumpVoteshare) })
+    .attr("x", function(d){ return x(d.wk5) })
+    .attr("dy", -10)
+    .attr("dx", -30)
+    .text("3/24/2020")
+
+  dots.append("text")
+    .attr("class", "countyExample exampleDateLabel")
+    .datum(cookD)
+    .attr("y", function(d){ return y(d.trumpVoteshare) })
+    .attr("x", function(d){ return x(d.wk5) })
+    .attr("dy", -18)
+    .attr("dx", -30)
+    .text("3/24/2020")
+
+  dots.append("circle")
+    .attr("class", "countyExample exampleStartDot")
+    .datum(cookD)
+    .attr("cy", function(d){ return y(d.trumpVoteshare) })
+    .attr("cx", function(d){ return x(d.wk5) })
+    .attr("r", 10)
+    .style("fill" ,"#fdbf11")
+
+  dots.append("circle")
+    .attr("class", "countyExample exampleStartDot")
+    .datum(shelbyD)
+    .attr("cy", function(d){ return y(d.trumpVoteshare) })
+    .attr("cx", function(d){ return x(d.wk5) })
+    .attr("r", 3)
+    .style("fill" ,"#fdbf11")
 
 
 
@@ -135,12 +223,26 @@ svg = d3.select(this)
   var setupSections = function (data) {
     // activateFunctions are called each
     // time the active section changes
-    activateFunctions[0] = function(){ step1(data) };
-    activateFunctions[1] = function(){ step2(data) };
+    activateFunctions[0] = function(){console.log("blank 0")}
+    activateFunctions[1] = function(){ step1(data) };
+    activateFunctions[2] = function(){ step2(data) };
+    activateFunctions[3] = function(){ step3(data) };
+    activateFunctions[4] = function(){ };
+    activateFunctions[5] = function(){ step4(data) };
+    activateFunctions[6] = function(){  };
+    activateFunctions[7] = function(){  };
 
 
-    updateFunctions[0] = function(offset){ update1(data, offset) }
-  updateFunctions[1] = function(offset){ update2(data, offset) }
+    updateFunctions[0] = function(offset){ }
+    updateFunctions[1] = function(offset){ update1(data, offset) }
+    updateFunctions[2] = function(){}
+    updateFunctions[3] = function(offset){ update2(data, offset) }
+    updateFunctions[4] = function(){}
+    updateFunctions[5] = function(){}
+    updateFunctions[6] = function(){}
+    updateFunctions[7] = function(){}
+
+    
   };
 
   /**
@@ -159,11 +261,65 @@ svg = d3.select(this)
   */
 
   function step1(data) {
-    // console.log(1, data)
+    console.log("blank 1")
   }
 
   function step2(data){
     // console.log(2, data)
+    // "17173"
+    // "17031"
+    // d3.select(".dot2.f17031").style("stroke","red").style("stroke-width","3px")
+        d3.selectAll(".dot2").style("stroke","none")
+        d3.selectAll(".countyExample").style("display", "none")
+
+
+  }
+  function step3(data){
+    // console.log(2, data)
+    // "17173"
+    // "17031"
+    d3.selectAll(".countyExample").style("display", "block")
+
+    d3.selectAll(".dot2")
+            .style("stroke","none")
+
+    d3.select(".dot2.f17173").style("stroke","#fdbf11").style("stroke-width","10px").style("opacity",1)
+    d3.select(".dot2.f17031").style("stroke","#fdbf11").style("stroke-width","10px").style("opacity",1)
+    
+    d3.select(".dot2.f17173").node().parentNode.appendChild(d3.select(".dot2.f17173").node())
+    d3.select(".dot2.f17031").node().parentNode.appendChild(d3.select(".dot2.f17031").node())
+
+    d3.selectAll(".axisLabel.x").style("display", "block")
+    d3.selectAll(".axisLabel.x.change").style("display", "none")
+
+  }
+  function step4(data){
+    
+    d3.selectAll(".countyExample").style("display", "none")
+    d3
+    .selectAll(".dot2")
+      .style("stroke","#fdbf11")
+      .style("stroke-width","1px")
+      .transition()
+      // .delay(function(d,i){ return d.trumpVoteshare * 500})
+
+      .ease(d3.easeLinear)
+      .attr("cx", function (d) {return x(d["wk66"] -  d["wk5"]); } )
+
+    d3.selectAll(".axisLabel.x").style("display", "none")
+    d3.selectAll(".axisLabel.x.change").style("display", "block")
+
+
+      d3.select(".dateLabel")
+        .html("March 24, 2020 &ndash;May 11, 2021")
+      // .style("stroke", "#fdbf11")
+      // .style("stroke-width","2px")
+      // .on("end", function(){
+      //     d3.select(this).style("opacity", function(d){ return d["wk" + wkNum] == -999 ? 0 : .4})
+
+      // })
+
+
   }
 
 
@@ -178,30 +334,72 @@ svg = d3.select(this)
     return wkNum
   }
 
+
   function updateDotPlotWeek(wkNum){
     d3
     .selectAll(".dot2")
       .transition()
-      .delay(function(d,i){ return d.trumpVoteshare * 500})
-      .ease(d3.easeLinear)
-      .attr("cx", function (d) {return x(d["wk" + wkNum]); } )
-      .on("end", function(){
-          d3.select(this).style("opacity", function(d){ return d["wk" + wkNum] == -999 ? 0 : .4})
+      // .delay(function(d,i){ return d.trumpVoteshare * 500})
+      .style("opacity", function(d){
 
-      })
+            if( +d["hide" + wkNum] == 0){
+              return 0
+            }
+            else if(activeIndex == 3 && (d.fips == "17173" || d.fips == "17031")){
+              return 1;
+            }else{
+              return .4;
+            }
+          })
+      .ease(d3.easeLinear)
+      .attr("cx", function (d) {
+        // if(d["wk" + wkNum] < -90) console.log(d["wk" + wkNum])
+        return x(d["wk" + wkNum]); 
+      } )
+
+      d3.select("#cookLine")
+      .transition()
+          .ease(d3.easeLinear)
+
+        .attr("x2", function(d){ return x(d["wk" + wkNum]) })
+
+      d3.select("#cookLabel")
+      .transition()
+          .ease(d3.easeLinear)
+        .attr("x", function(d){ return x(d["wk" + wkNum]) })
+
+
+      d3.select("#shelbyLine")
+      .transition()
+          .ease(d3.easeLinear)
+
+        .attr("x2", function(d){ return x(d["wk" + wkNum]) })
+
+      d3.select("#shelbyLabel")
+      .transition()
+          .ease(d3.easeLinear)
+        .attr("x", function(d){ return x(d["wk" + wkNum]) })
+
+
+
+      newDate = new Date(START_DATE.getTime())
+      newDate.setDate(newDate.getDate() + wkNum*7)
+      var dateStr = MONTHS[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
+      d3.select(".dateLabel")
+        .text(dateStr)
   }
 
   function update1(data,offset){
     // console.log("asdf")
     // console.log(offset)
-    var wkNum = getTweenedWeekNum(offset, .35, .75, 0, 5)
+    var wkNum = getTweenedWeekNum(offset, 0, .95, 0, 5)
     updateDotPlotWeek(wkNum)
 
 
 
   }
   function update2(data,offset){
-    var wkNum = getTweenedWeekNum(offset, .35, .75, 6, 44)
+    var wkNum = getTweenedWeekNum(offset, 0, .95, 6, 64)
     updateDotPlotWeek(wkNum)
     
   }
@@ -297,6 +495,7 @@ function display(data) {
 
 // load data and display
 d3.csv("data/weeklyData.csv", function(data){
+  // data = data.filter(function(d){ return d.state == "Illinois"})
   display(data)
 });
 // 

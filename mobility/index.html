@@ -7,7 +7,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,900;1,300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,900;1,300&display=swap" rel="stylesheet">
 
 
 </head>
@@ -18,41 +18,64 @@
 <div class="container">
   <div id='graphic'>
     <div id = "topText">
-        <div id = "topTitle">Title</div>
-        <div class = "pubDate">November 29, 2017</div>
+        <div id = "topTitle">How US counties are returning to work</div>
+        <div class = "pubDate">Tuesday May 18, 2021</div>
         <p>
-        School funding is a blend of federal, state, and local dollars. Local funding largely comes from property taxes. Federal money, which accounts for just 10 percent of all education funding, tends to target low-income students or other distinct groups. State funding is where things get complicated. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa tincidunt. Congue quisque egestas diam in arcu cursus. Montes nascetur ridiculus mus mauris vitae ultricies leo integer malesuada. Cras semper auctor neque vitae tempus quam pellentesque. Ultrices gravida dictum fusce ut placerat. Viverra vitae congue eu consequat ac felis donec et odio. Egestas quis ipsum suspendisse ultrices gravida dictum. Tempor orci dapibus ultrices in iaculis nunc sed augue lacus. Eget felis eget nunc lobortis mattis aliquam faucibus. Placerat orci nulla pellentesque dignissim enim sit amet venenatis urna. Arcu risus quis varius quam quisque id diam vel quam. Enim diam vulputate ut pharetra sit amet aliquam id.
         </p>
         <p>
-        In all but five states, statewide formulas control most <a href = "https://apps.urban.org/features/education-funding-trends/" target = "_blank">school funding</a>. State education funding formulas have been the subject of controversy, confusion, and even lawsuits. Designed to ensure adequate funding across schools&mdash;and occasionally to <a href = "https://apps.urban.org/features/school-funding-do-poor-kids-get-fair-share/" target = "_blank">promote equity</a>&mdash;funding formulas distribute revenue to districts based on a variety of factors. 
-        </p>
-        <p>
-        These formulas often attempt to account for state and district revenue and anticipated differences among districts. What they cannot always account for, however, is how districts might respond to different incentives. In these often complex funding models, states aim to strike a balance between giving localities some control while maintaining enough control at the state level to ensure all students can access a quality education. 
-        </p>
-        <p>
-        Here, we explore the most common funding models states use and how districts might respond to those models. No one model is best&mdash;they create different incentives for districts that can bring distinct advantages and disadvantages. 
+      Gravida cum sociis natoque penatibus. Tempus iaculis urna id volutpat lacus laoreet non. Libero nunc consequat interdum varius sit amet mattis vulputate. Nulla aliquet enim tortor at auctor urna. Erat imperdiet sed euismod nisi porta. Dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo. Vestibulum rhoncus est pellentesque elit. Adipiscing at in tellus integer feugiat scelerisque varius. Feugiat nibh sed pulvinar proin gravida. Nunc sed augue lacus viverra vitae congue eu consequat. Facilisis magna etiam tempor orci eu. Pretium viverra suspendisse potenti nullam ac tortor vitae. Sit amet consectetur adipiscing elit duis tristique. Non curabitur gravida arcu ac tortor. Elit at imperdiet dui accumsan. At auctor urna nunc id cursus metus. Semper eget duis at tellus at urna condimentum mattis. Consequat mauris nunc congue nisi vitae suscipit tellus mauris. Justo donec enim diam vulputate ut. Cras sed felis eget velit aliquet sagittis id.
+
         </p>
       </div>
+    <div id='vis'>
+        <div class = "dateLabel"></div>
+        <div class = "x axisLabel pos">More time at work</div>
+        <div class = "x axisLabel neg">Less time at work</div>
+        <div class = "x axisLabel pos change">Returning to the workplace</div>
+        <div class = "x axisLabel neg change">Leaving the workplace</div>
+        <div class = "y axisLabel pos">More Trump votes</div>
+        <div class = "y axisLabel neg">More Clinton votes</div>
+    </div>
+
     <div id='sections'>
-      <section class="step">
-        <div class="title">Foundation Grants: States Ensure an Equal Foundation for All Districts</div>
+      <section class="step step0">
+        The baseline of 0 was set from data collected over 5 weeks, between January 3rd and February 6th, 2020. On Tuesday February 18th, folks were still more or less going about their normal routines.
       </section>
       <section class="step step1">
         <p>
-        The state fills the gap between what the district is expected to provide and the predetermined minimum, as indicated with a dark blue bar.</p>
+        Then lockdown took effect, each week fewer and fewer people went into work, peaking on March 24th, 2020. Here a pattern emerges&mdash;people in largely rural Trump counties continued to go into workplaces more than people in more urban, Democratic counties.</p>
       </section>
       <section class="step">
         <p>
-        In our example, districts are required by the state to have a minimum 1 percent property tax, but they can opt to tax up to 1.4 percent. 
-        </p>
+        Let&rsquo;s track the return to work for two counties, one at each extreme. Cook county, Illinois is home to Chicago and the surrounding suburbs. Two hundred miles to the south lies Shelby county, where TK% work in agrigulture or manufacturing.</p>
+      </section>
+      <section class="step stepLong">
         <p>
-        We&rsquo;ve modeled what would happen if every district taxed at a higher rate. Critically, the state&rsquo;s contribution remains the same regardless of the district&rsquo;s property tax rate, so any increase in funding comes from the district&rsquo;s local tax base.
-        </p>
-        <p>
-        As you&rsquo;d expect, the property-poor districts don&rsquo;t get much additional funding by raising the property tax, but property-wealthy districts can raise a lot more. Still, every district is exceeding the minimum at this higher tax rate.
+            Over 2020 and into 2021, people in both counties steadily returned to workplaces. While there were consistently more people at work in Shelby County, workers in Cook county returned at around the same rate.
         </p>
       </section>
       <section class="step">
+        <p>
+        And in fact, if we plot the <em>change</em> in the index between March 24<sup>th</sup>, 2020 and May 11<sup>th</sup>, 2021&hellip;</p>
+      </section>
+      <section class="step">
+        <p>
+            &hellip;we see the correlation to voteshare dissapear. In general, Democratic and Republican counties are returning to work at the same rate.
+        </p>
+      </section>
+      <section class = "step">
+                <p>
+      Gravida cum sociis natoque penatibus. Tempus iaculis urna id volutpat lacus laoreet non. Libero nunc consequat interdum varius sit amet mattis vulputate. Nulla aliquet enim tortor at auctor urna. Erat imperdiet sed euismod nisi porta. Dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo. Vestibulum rhoncus est pellentesque elit. Adipiscing at in tellus integer feugiat scelerisque varius. Feugiat nibh sed pulvinar proin gravida. Nunc sed augue lacus viverra vitae congue eu consequat. Facilisis magna etiam tempor orci eu. Pretium viverra suspendisse potenti nullam ac tortor vitae. Sit amet consectetur adipiscing elit duis tristique. Non curabitur gravida arcu ac tortor. Elit at imperdiet dui accumsan. At auctor urna nunc id cursus metus. Semper eget duis at tellus at urna condimentum mattis. Consequat mauris nunc congue nisi vitae suscipit tellus mauris. Justo donec enim diam vulputate ut. Cras sed felis eget velit aliquet sagittis id.
+
+        </p>
+      </section>
+    <section class="step lastStep">
+        <p>
+
+        </p>
+      </section>
+      <!-- <section class="step">
         <p>
         Using the sliders and buttons to the right, you can model what happens as districts change their property tax rates. Changes make a bigger difference for the property-wealthy districts, though the property-poor districts will never be far above the $10,000 threshold. 
         </p>
@@ -145,36 +168,12 @@
         Just like in the other models, states that use the centralized school finance model have to decide how to treat districts, like our richest district, that can raise more than the standard payment using a 1 percent tax. The state could grandfather in such districts, either temporarily or permanently, or the state could recapture surplus funds.
         </p>
       </section>
-      <section class="step lastStep">
-        <p>
-
-        </p>
-      </section>
+-->
       <div id = "extra-space"></div>
     </div>
 
-    <div id='vis'>
-        <div class = "x axisLabel pos">More time at work</div>
-        <div class = "x axisLabel neg">Less time at work</div>
-        <div class = "y axisLabel pos">More Trump votes</div>
-        <div class = "y axisLabel neg">More Clinton votes</div>
-    </div>
+
   </div>
-</div>
-<div id = "bottomContent">
-  <div id = "bottomTitle">Accounting for Student Need</div>
-  <p>
-  In this interactive, we&rsquo;ve highlighted three methods states use to distribute state funding to school districts. Although these methods are often tied to property wealth, in many states, the districts with the neediest students are not the ones with the lowest property wealth. In part because of this, most states use additional mechanisms to deliver more funding to districts that have more need, either through the formula or outside of it.
-  </p>
-  <p>
-  For example, many states &ldquo;weight&rdquo; students when running their formula, assigning more weight (and therefore more dollars) to students from low-income backgrounds or to students with special needs when calculating the amount of funding guaranteed by the state. States may also use categorical funding, assigning dollars specifically for certain programs or for spending on specific students.
-  </p>
-  <p>
-  Because states can provide revenue through other mechanisms, the proportion of state funds distributed through a typical formula grant vary substantially. For example, Arizona and North Carolina distribute roughly 98 percent of total state funding through their formulas, yet Connecticut distributes 38 percent of funding this way, and South Carolina distributes just 24 percent of its funding through a formula. 
-  </p>
-  <p>
-  Whether relying heavily on a funding formula is good for schools and students depends on the state and its goals; there is no one-size-fits-all approach to school funding. States have different aims, different obstacles, and different students, and so must choose the combination of approaches that works best given the situation. 
-  </p>
 </div>
 
 
