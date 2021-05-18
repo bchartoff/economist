@@ -307,11 +307,21 @@ svg = d3.select(this)
     .selectAll(".dot2")
       .style("stroke","#fdbf11")
       .style("stroke-width","1px")
+            .style("opacity", function(d){
+              console.log(d)
+            if( +d["hide64"] == 0 || +d["hide5"] == 0 ){
+              return 0
+
+            }else{
+              return .4;
+            }
+          })
       .transition()
       // .delay(function(d,i){ return d.trumpVoteshare * 500})
 
       .ease(d3.easeLinear)
-      .attr("cx", function (d) {return x(d["wk66"] -  d["wk5"]); } )
+      .attr("cx", function (d) {return x(d["wk64"] -  d["wk5"]); } )
+
 
     d3.selectAll(".axisLabel.x").style("display", "none")
     d3.selectAll(".axisLabel.x.change").style("display", "block")
