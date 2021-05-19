@@ -1,53 +1,28 @@
-/*#sections{
-  pointer-events: none;
-  opacity: 0;
-}
-*/
-
+/************************************************/
+/**************** GENERAL LAYOUT ***************/
+/**********************************************/
 body{
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
-
 }
 svg{
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
 }
-.container {
-  width: 1180px;
-}
 
 #graphic {
   padding-top: 60px;
 }
-
 #topTitle{
   font-size: 30px;
   text-align: left;
   padding-bottom: 20px;
 }
-#topText, #bottomContent{
+#topText{
   width: 960px;
   margin: 0 auto;
+  font-size: 18px;
 }
-#bottomTitle{
-  font-weight: bold;
-  margin-bottom: 10px;  
-}
-#bottomContent{
-  width: 1150px;
-    margin: 0 auto;
-    padding: 0px;
-}
-#topHR{
-  width: 130px;
-  height: 6px;
-  background-color: #1696d2;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-
-
 p{
   line-height:1.6;
   margin-bottom:15px !important;
@@ -57,7 +32,7 @@ p{
   display: inline-block;
   width: 400px;
   top: 0px;
-  z-index: 90;
+  z-index: 2;
   padding-bottom: 30px;
   pointer-events: auto;
 }
@@ -66,122 +41,53 @@ p{
 }
 .step {
   margin-bottom: 1500px;
-  font-family: "Lato";
   font-size: 16px;
   line-height: 23px;
   color: #000;
 }
-.step.step1{
-  /*margin-bottom: 3500px;*/
-}
-
-.smallStep{
-  /*margin-bottom: 400px;*/
-}
-.title{
-  font-size:18px;
-   margin-top:40px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.subtitle{
-  margin-top: -8px;
-  font-size: 17px;
-  font-style: italic;
-  margin-bottom: 8px;
-}
-#extra-space {
-  height: 0px;
-}
-
 #vis {
   display: block;
   z-index: 1;
   margin: 0 auto;
   position: relative;
   width: 960px;
-  /*top: 730px;*/
-  /*float: right;*/
 }
 #vis svg{
   cursor: pointer;
-}
-#vis svg.nonInteractive{
-  cursor: auto;
 }
 #vis.posFixed{
   position: fixed;
   top: 20px;
 }
-#vis.posRelTop{
-  position: relative;
-  float: right;
-  padding-left: 10px;
-}
-#vis.posRelBottom{
-  position: relative;
-  float: inherit;
-  padding-left: 0px;
-  bottom: -110px;
-}
-#vis.posRelBottomSingleCol{
-  position: absolute;
-  float: inherit;
-  padding-left: 10px;
-}
-#vis.posRelTopSingleCol{
-   position: absolute;
-  float: inherit;
-  padding-left: 10px; 
-}
-
-
-
-
-
-
-  .container{
-    margin-left: auto;
-    width: 100%;
-  }
-
-  #topText, #bottomContent{
-    font-size: 18px;
-  }
 #extra-space {
   height: 680px;
   z-index: -1;
 }
-  #sections{
-    display: inherit;
-    width: 400px;
-    margin: 0 auto;
-    pointer-events: none;
-  }
-  .step {
-    margin-bottom: 1000px;
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: rgb(136, 136, 136) 4px 4px 16px;
-    padding: 30px;
-    z-index: 2;
-  }
-  .step.stepLong{
-    margin-bottom: 5000px;
-  }
-  .lastStep{
-    opacity: 0 !important;
-  }
-  #bottomContent {
-      width: calc(100% - 80px);
-  }
-  .step.lastStep{
-    margin-bottom: 0px;
-  }
+#sections{
+  display: inherit;
+  width: 400px;
+  margin: 0 auto;
+  pointer-events: none;
+}
+.step {
+  margin-bottom: 1000px;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: rgb(136, 136, 136) 4px 4px 16px;
+  padding: 30px;
+  z-index: 2;
+}
+.step.stepLong{
+  margin-bottom: 5000px;
+}
+.step.lastStep{
+  opacity: 0 !important;
+  margin-bottom: 0px;
+}
 
-
-
-
+/************************************************/
+/**************** CHART ELEMENTS ***************/
+/**********************************************/
 .axis path, .axis .tick line{
   stroke: #d2d2d2;
 }
@@ -189,61 +95,54 @@ p{
   font-size: 16px;
   opacity: .4;
 }
-
 .axisLabel{
   position: absolute;
   text-transform: uppercase;
   font-weight: 900;
-    font-size: 18px;
-    opacity: .4;
-    letter-spacing: 2px;
+  font-size: 18px;
+  opacity: .4;
+  letter-spacing: 2px;
 }
 .axisLabel.x{
   top: 324px;
 }
 .axisLabel.x.pos{
-    right: -10px; 
-  }
-  .axisLabel.x.neg{
-    left: 10px;
-  }
-  .axisLabel.y{
-    left: 297px;
-    font-size: 27px;
-  }
+  right: -10px; 
+}
+.axisLabel.x.neg{
+  left: 10px;
+}
+.axisLabel.y{
+  left: 297px;
+  font-size: 27px;
+}
 .axisLabel.y.pos{
   color: #F22E2E;
   top: 50px;
 }
 .axisLabel.y.neg{
-    color: #0FB2F2;
-    top: 590px;
+  color: #0FB2F2;
+  top: 590px;
 }
 .axisLabel.change{
   display: none;
 }
-
 .dateLabel{
   position: absolute;
-    top: 45px;
-    right: -120px;
-    font-size: 46px;
-    font-weight: 100;
-    width: 365px;
+  top: 45px;
+  right: -120px;
+  font-size: 46px;
+  font-weight: 100;
+  width: 365px;
 }
 .dateCaption{
-position: absolute;
-    top: 97px;
-    right: -9px;
-    /* font-weight: bold; */
-    font-size: 21px;
-    animation: fat 5s infinite;
-    display: none;
+  position: absolute;
+  top: 97px;
+  right: -9px;
+  font-size: 21px;
+  animation: fat 5s infinite;
+  display: none;
 }
-.element {
-  
-}
-
 @keyframes fat {
   0% {
     color: #fdbf11;
@@ -258,7 +157,6 @@ position: absolute;
     color: #fdbf11;
   }
 }
-
 .exampleLabel{
   font-weight: bold;
   font-size: 20px;
