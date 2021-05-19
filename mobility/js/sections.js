@@ -91,7 +91,7 @@ svg = d3.select(this)
   *  element for each filler word type.
   * @param histData - binned histogram data
   */
-  var setupVis = function (data) {    
+  var setupVis = function (data) {   
   g.append("g")
     .call(d3.axisBottom(x))
     .attr("transform", "translate(0," + y(.5) + ")")
@@ -129,7 +129,6 @@ svg = d3.select(this)
   var cookD =  data.filter(function(d){ return d.fips == "17031"})[0],
       shelbyD = data.filter(function(d){ return d.fips == "17173"})[0]
 
-  console.log(cookD)
 
   dots.append("line")
     .attr("id", "cookLine")
@@ -216,6 +215,48 @@ svg = d3.select(this)
     .style("display", "none")
 
 
+  var legend = g.append("g")
+    .attr("id", "dotLegend")
+
+  legend.attr("transform", "translate(" + (width - 50) + "," + (height - 35) + ")")
+  legend.append("circle")
+    .attr("class", "legendCircle")
+    .attr("r", Math.sqrt(10000000) * 0.008)
+  legend.append("circle")
+    .attr("class", "legendCircle")
+    .attr("r", Math.sqrt(5000000) * 0.008)
+    .attr("cy", 8)
+  legend.append("circle")
+  .attr("class", "legendCircle")
+    .attr("r", Math.sqrt(1000000) * 0.008)
+    .attr("cy", 18.5)
+
+  legend.append("text")
+    .attr("class", "legendText")
+    .attr("y", -27)
+    .attr("x", -12)
+    .text("10M")
+  legend.append("text")
+    .attr("class", "legendText")
+    .attr("y", -11)
+    .attr("x", -9)
+    .text("5M")
+  legend.append("text")
+    .attr("class", "legendText")
+    .attr("y", 9)
+    .attr("x", -9)
+    .text("1M")
+  legend.append("text")
+    .attr("class", "legendText")
+    .attr("y", 40)
+    .attr("x", -54)
+    .text("County population")
+
+      //     .attr("r", function(d){
+      //   return Math.sqrt(d.pop) * 0.008
+      // })
+
+
 
   };
 
@@ -229,7 +270,7 @@ svg = d3.select(this)
   var setupSections = function (data) {
     // activateFunctions are called each
     // time the active section changes
-    activateFunctions[0] = function(){console.log("blank 0")}
+    activateFunctions[0] = function(){}
     activateFunctions[1] = function(){ step1(data) };
     activateFunctions[2] = function(){ step2(data) };
     activateFunctions[3] = function(){ step3(data) };
@@ -267,7 +308,6 @@ svg = d3.select(this)
   */
 
   function step1(data) {
-    console.log("blank 1")
     d3.selectAll(".countyExample").style("display", "none")
   }
 
@@ -308,7 +348,6 @@ svg = d3.select(this)
       .style("stroke","#fdbf11")
       .style("stroke-width","1px")
             .style("opacity", function(d){
-              console.log(d)
             if( +d["hide64"] == 0 || +d["hide5"] == 0 ){
               return 0
 
@@ -515,8 +554,7 @@ function display(data) {
 }
 
 // load data and display
-d3.csv("data/weeklyData.csv", function(data){
-  // data = data.filter(function(d){ return d.state == "Illinois"})
+d3.csv("data/weeklyData.csv").then(function(data){
   display(data)
 });
 // 

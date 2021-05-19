@@ -264,3 +264,11 @@ position: absolute;
   font-size: 20px;
   opacity: .6;
 }
+.legendText{
+  font-size: 12px;
+  fill: #aaa;
+}
+.legendCircle{
+  fill: none;
+  stroke: #aaa;
+}
