@@ -4,9 +4,7 @@ import holidays
 import numpy as np
 import json
 
-
 usHolidays = holidays.UnitedStates()
-
 
 mobilityReader2020 = csv.reader(open("data/source/2020_US_Region_Mobility_Report.csv","r"))
 mobilityReader2021 = csv.reader(open("data/source/2021_US_Region_Mobility_Report.csv","r"))
@@ -33,18 +31,15 @@ for row in popReader:
     popData[fips] = int(row[18])
 
 
-
 mobilityHead = next(mobilityReader2020)
 next(mobilityReader2021)
 
+# build a quick lookup to match column names to row indices
 h = {}
 for ind, val in enumerate(mobilityHead):
     h[val] = ind
 
-
 tempData = {}
-
-
 datestmp = []
 def parseMobilityCSV(csvReader):
     t = []
@@ -70,34 +65,17 @@ def parseMobilityCSV(csvReader):
         year = dateDate.isocalendar().year
         week = dateDate.isocalendar().week
         
-        # if dateDate in usHolidays:
-        #     t.append(dateDate.weekday())
-
+        #grab data for Tuesdays only
         if dateDate.weekday() != 1:
             continue
         if dateDate in usHolidays:
             print(dateDate)
         weekNum = week - 8 if year == 2020 else week - 8 + 53
         datestmp.append(dateStr)
-        # print(datestmp)
-
-        # if(weekNum == 38):
-        #     print(dateDate)
-        # if(weekNum not in tempData[tempKey]["workplace"]):
-            # tempData[tempKey]["workplace"][weekNum] = []
 
         workplaceValStr = row[h["workplaces_percent_change_from_baseline"]]
-        # if(weekNum == 38):
-        #     print(float(workplaceValStr))
-        # workplaceVal = float(row[h["workplaces_percent_change_from_baseline"]])
         if(workplaceValStr != ''):
             tempData[tempKey]["workplace"][weekNum] = float(workplaceValStr)
-
-        # print(dateStr, dateDate.isocalendar(), year, week, weekNum)
-
-    # print(list(set(t)))
-    # print(c)
-
 
 parseMobilityCSV(mobilityReader2020)
 parseMobilityCSV(mobilityReader2021)
@@ -114,42 +92,25 @@ for i in range(0, maxWeek):
 
 out.writerow(outHead)
 for place in tempData:
-    # print(place)
     el = tempData[place]
     outDict = {"fips": el["fips"], "county": el["county"], "pop": el["pop"],"trumpVoteshare": el["trumpVoteshare"],  "state": el["state"] }
     outRow = [el["fips"], el["county"], el["state"], el["pop"], el["trumpVoteshare"]]
     wkData = []
     for i in range(0, maxWeek):
-        # if len(el["workplace"][]) > 0:
+    # we'll set opacity to 0 for weeks with missing data. Certainly not an efficient way to do this since it ramps up the file size so much, but fine for this exercise!
         if i in el["workplace"]:
-            # if len(el["workplace"][i]) > 0:
             outRow.append(1)
             wkData.append(el["workplace"][i])
         else:
             outRow.append(0)
             wkData.append(-999)
 
-    # if(el["fips"] == 47019):
     prevWeek = 0
     for d in wkData:
         if(d == -999):
+        # for weeks with missing data, keep the dots in the same location (vs going to 0 or some other value), just toggle opacity
             outRow.append(prevWeek)
         else:
             prevWeek = d
             outRow.append(d)
-        # print(outRow)
-
-    # print(outRow)
     out.writerow(outRow)
-
-#     for wk in el["workplace"]:
-#         if len(el["workplace"][wk]) > 0:
-#             outDict["wk%i"%wk] = np.mean(el["workplace"][wk])
-#     outData.append(outDict)
-
-# with open("data/weeklyData.json","w") as f:
-#     json.dump(outData, f)
-
-
-# date.fromisoformat
-# date.weekday 0 monday 6 sunday
